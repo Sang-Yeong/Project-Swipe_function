@@ -24,17 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         final View view = findViewById(R.id.view);
 
-        // 외부앱 실행시키기--> onCreate문
-        Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.user.application_settingspeed");
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-
-        View.OnClickListener btnListen = new View.OnClickListener(){
-            public void onClick(View v){
-
-            }
-        };
-
         view.setOnTouchListener(new View.OnTouchListener(){
 
             float originX, originY, finX, finY;
@@ -123,29 +112,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }//end of onCreate method
-
-    // Running an external application
-    public boolean getPackageList() {
-        boolean isExist = false;
-
-        PackageManager pkgMgr = getPackageManager();
-        List<ResolveInfo> mApps;
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        mApps = pkgMgr.queryIntentActivities(mainIntent, 0);
-
-        try {
-            for (int i = 0; i < mApps.size(); i++) {
-                if(mApps.get(i).activityInfo.packageName.startsWith("com.example.testapp")){
-                    isExist = true;
-                    break;
-                }
-            }
-        }
-        catch (Exception e) {
-            isExist = false;
-        }
-        return isExist;
-    }
 
 }//end of MainActivity class
